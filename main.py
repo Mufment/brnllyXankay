@@ -17,11 +17,11 @@ def calcular_bernoulli(p1, v1, h1, p2, v2, h2):
 @app.route('/calcular', methods=['POST'])
 def calcular():
     data = request.json
-    p1 = data['p1']
-    v1 = data['v1']
+    p1 = data['p1'] * 1000  # convert kPa to Pa
+    v1 = data['v1'] / 1000  # convert mm/s to m/s
     h1 = data['h1']
-    p2 = data['p2']
-    v2 = data['v2']
+    p2 = data['p2'] * 1000  # convert kPa to Pa
+    v2 = data['v2'] / 1000  # convert mm/s to m/s
     h2 = data['h2']
 
     # Cálculo de la energía total en el punto 1
@@ -34,7 +34,6 @@ def calcular():
     resultado = e1 - e2
 
     return jsonify({"resultado": resultado})
-
 @app.route('/', methods=['GET'])
 def index():
     return "La aplicación BernoulliAPI está corriendo correctamente"
