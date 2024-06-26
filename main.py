@@ -14,20 +14,26 @@ def calcular_bernoulli(p1, v1, h1, p2, v2, h2):
 
     return term1 - term2
 
+from flask import Flask, request, jsonify
+import math
+
+app = Flask(__name__)
+
 @app.route('/calcular', methods=['POST'])
-def calcular():
+def calcular_bernoulli():
     data = request.json
-    p1 = data['p1']
-    v1 = data['v1'] / 1000  # convert mm/s to m/s
-    h1 = data['h1']
-    p2 = data['p2']
-    v2 = data['v2'] / 1000  # convert mm/s to m/s
-    h2 = data['h2']
+    P = data.get('P')
+    p = data.get('p')
+    v = data.get('v')
+    g = data.get('g')
+    h = data.get('h')
 
-    # Cálculo de la diferencia de energía entre los dos puntos
-    resultado = (p1 / 1000 + 0.5 * v1**2 + 9.81 * h1) - (p2 / 1000 + 0.5 * v2**2 + 9.81 * h2)
+    resultado = P + (0.5 * p * math.pow(v, 2)) + (p * g * h)
+    return jsonify({'resultado': resultado})
 
-    return jsonify({"resultado": resultado})
+if __name__ == '__main__':
+    app.run(debug=True)
+
 @app.route('/', methods=['GET'])
 def index():
     return "La aplicación BernoulliAPI está corriendo correctamente"
