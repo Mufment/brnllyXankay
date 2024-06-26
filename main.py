@@ -24,8 +24,14 @@ def calcular():
     v2 = data['v2']
     h2 = data['h2']
 
-    # Realiza los cálculos de Bernoulli aquí y devuelve el resultado
-    resultado = (p1 + 0.5 * 1000 * v1**2 + 1000 * 9.81 * h1) - (p2 + 0.5 * 1000 * v2**2 + 1000 * 9.81 * h2)
+    # Cálculo de la energía total en el punto 1
+    e1 = p1 + 0.5 * 1000 * v1**2 + 1000 * 9.81 * h1
+
+    # Cálculo de la energía total en el punto 2
+    e2 = p2 + 0.5 * 1000 * v2**2 + 1000 * 9.81 * h2
+
+    # Cálculo de la diferencia de energía entre los dos puntos
+    resultado = e1 - e2
 
     return jsonify({"resultado": resultado})
 
