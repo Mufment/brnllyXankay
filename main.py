@@ -3,6 +3,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)  # Esto permite solicitudes CORS desde cualquier origen
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 def calcular_bernoulli(p1, v1, h1, p2, v2, h2):
     g = 9.81  # Aceleración gravitacional en m/s^2
