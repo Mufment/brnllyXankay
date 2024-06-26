@@ -17,21 +17,15 @@ def calcular_bernoulli(p1, v1, h1, p2, v2, h2):
 @app.route('/calcular', methods=['POST'])
 def calcular():
     data = request.json
-    p1 = data['p1'] * 1000  # convert kPa to Pa
+    p1 = data['p1']
     v1 = data['v1'] / 1000  # convert mm/s to m/s
     h1 = data['h1']
-    p2 = data['p2'] * 1000  # convert kPa to Pa
+    p2 = data['p2']
     v2 = data['v2'] / 1000  # convert mm/s to m/s
     h2 = data['h2']
 
-    # Cálculo de la energía total en el punto 1
-    e1 = p1 + 0.5 * 1000 * v1**2 + 1000 * 9.81 * h1
-
-    # Cálculo de la energía total en el punto 2
-    e2 = p2 + 0.5 * 1000 * v2**2 + 1000 * 9.81 * h2
-
     # Cálculo de la diferencia de energía entre los dos puntos
-    resultado = e1 - e2
+    resultado = (p1 / 1000 + 0.5 * v1**2 + 9.81 * h1) - (p2 / 1000 + 0.5 * v2**2 + 9.81 * h2)
 
     return jsonify({"resultado": resultado})
 @app.route('/', methods=['GET'])
