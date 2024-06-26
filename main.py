@@ -1,23 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
-app = Flask(__name__)
-CORS(app)  # Esto permite solicitudes CORS desde cualquier origen
-CORS(app, resources={r"/*": {"origins": "*"}})
-
-def calcular_bernoulli(p1, v1, h1, p2, v2, h2):
-    g = 9.81  # Aceleración gravitacional en m/s^2
-    rho = 1000  # Densidad del agua en kg/m^3
-
-    term1 = p1 / (rho * g) + v1**2 / (2 * g) + h1
-    term2 = p2 / (rho * g) + v2**2 / (2 * g) + h2
-
-    return term1 - term2
-
-from flask import Flask, request, jsonify
 import math
-
-app = Flask(__name__)
 
 @app.route('/calcular', methods=['POST'])
 def calcular_bernoulli():
