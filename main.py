@@ -1,8 +1,4 @@
 from flask import Flask, request, jsonify
-import numpy as np
-import matplotlib.pyplot as plt
-import io
-import base64
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -31,6 +27,10 @@ def calcular():
     resultado = (p1 + 0.5 * 1000 * v1**2 + 1000 * 9.81 * h1) - (p2 + 0.5 * 1000 * v2**2 + 1000 * 9.81 * h2)
 
     return jsonify({"resultado": resultado})
+
+@app.route('/', methods=['GET'])
+def index():
+    return "La aplicación BernoulliAPI está corriendo correctamente"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
