@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import math  # Importar el módulo math
+
 
 app = Flask(__name__)
 CORS(app)  # Esto permite solicitudes CORS desde cualquier origen
